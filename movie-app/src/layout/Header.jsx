@@ -2,7 +2,7 @@ export default function Header() {
   return (
     <nav className="Header__nav  blue darken-2">
       <div className="">
-        <a href="" className="brand-logo ">
+        <a href="" className="brand-logo">
           <span>React.</span>movie
         </a>
         <ul className="right hide-on-med-and-down">

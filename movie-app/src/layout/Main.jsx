@@ -9,14 +9,14 @@ export default class Main extends React.Component {
     loading: true,
   };
   componentDidMount() {
-    fetch("http://www.omdbapi.com/?apikey=329ffa13&s=simpsons")
+    fetch("https://www.omdbapi.com/?apikey=329ffa13&s=simpsons")
       .then((response) => response.json())
       .then((data) => this.setState({ movies: data.Search, loading: false }));
   }
   SearchMovies = (str, type = "all") => {
     this.setState({ loading: true });
     fetch(
-      `http://www.omdbapi.com/?apikey=329ffa13&s=${str}${
+      `https://www.omdbapi.com/?apikey=329ffa13&s=${str}${
         type !== "all" ? `&type=${type}` : ""
       }`
     )
