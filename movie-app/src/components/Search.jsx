@@ -25,7 +25,7 @@ export default class Search extends React.Component {
     return (
       <div className="">
         {/* <form className="search__form"> */}
-        <div className="search__form border-none">
+        <div className="search__form">
           <input
             type="search"
             placeholder="Search..."

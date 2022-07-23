@@ -26,7 +26,7 @@ export default class Main extends React.Component {
 
   render() {
     return (
-      <div className="content">
+      <div className="content ">
         <Search searchMovie={this.SearchMovies} />
         {this.state.loading ? (
           <Loader />
