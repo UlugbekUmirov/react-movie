@@ -1,85 +1,75 @@
-import React from "react";
-export default class Search extends React.Component {
-  state = {
-    search: "simpsons",
-    type: "all",
-  };
+import React, { useState } from "react";
+export default function Search({ searchMovie }) {
+  const [search, setSearch] = useState("simpsons");
+  const [type, setType] = useState("all");
 
-  handlekey = (e) => {
+  const handlekey = (e) => {
     if (e.key === "Enter") {
-      this.props.searchMovie(this.state.search, this.state.type);
+      searchMovie(search, type);
     }
   };
-  handleChange = (e) => {
-    this.setState(() => ({ search: e.target.value }));
+  const handleChange = (e) => {
+    setSearch(e.target.value);
   };
-  handelFilter = (e) => {
-    this.setState(
-      () => ({ type: e.target.dataset.type }),
-      () => {
-        this.props.searchMovie(this.state.search, this.state.type);
-      }
-    );
+  const handelFilter = (e) => {
+    setType(e.target.dataset.type);
+    searchMovie(search, e.target.dataset.type);
   };
-  render() {
-    return (
-      <div className="">
-        {/* <form className="search__form"> */}
-        <div className="search__form">
-          <input
-            type="search"
-            placeholder="Search..."
-            className="search__input "
-            value={this.state.search}
-            onKeyDown={this.handlekey}
-            onChange={this.handleChange}
-          />
-          <button
-            className="search-btn"
-            onClick={() =>
-              this.props.searchMovie(this.state.search, this.state.type)
-            }
-          >
-            <i className="fas fa-search"></i>
-          </button>
-        </div>
-        {/* </form> */}
-        <div className="labels">
-          <label>
-            <input
-              className="with-gap blue darken-2 "
-              name="group3"
-              type="radio"
-              data-type="all"
-              onChange={this.handelFilter}
-              checked={this.state.type === "all"}
-            />
-            <span>All</span>
-          </label>
-          <label>
-            <input
-              className="with-gap blue darken-2"
-              name="group3"
-              type="radio"
-              data-type="movie"
-              onChange={this.handelFilter}
-              checked={this.state.type === "movie"}
-            />
-            <span>Movies</span>
-          </label>
-          <label>
-            <input
-              className="with-gap blue darken-2"
-              name="group3"
-              type="radio"
-              data-type="series"
-              onChange={this.handelFilter}
-              checked={this.state.type === "series"}
-            />
-            <span>Series</span>
-          </label>
-        </div>
+
+  return (
+    <div className="">
+      <div className="search__form">
+        <input
+          type="search"
+          placeholder="Search..."
+          className="search__input "
+          value={search}
+          onKeyDown={handlekey}
+          onChange={handleChange}
+        />
+        <button
+          className="search-btn"
+          onClick={() => searchMovie(search, type)}
+        >
+          <i className="fas fa-search"></i>
+        </button>
       </div>
-    );
-  }
+      {/* </form> */}
+      <div className="labels">
+        <label>
+          <input
+            className="with-gap blue darken-2 "
+            name="group3"
+            type="radio"
+            data-type="all"
+            onChange={handelFilter}
+            checked={type === "all"}
+          />
+          <span>All</span>
+        </label>
+        <label>
+          <input
+            className="with-gap blue darken-2"
+            name="group3"
+            type="radio"
+            data-type="movie"
+            onChange={handelFilter}
+            checked={type === "movie"}
+          />
+          <span>Movies</span>
+        </label>
+        <label>
+          <input
+            className="with-gap blue darken-2"
+            name="group3"
+            type="radio"
+            data-type="series"
+            onChange={handelFilter}
+            checked={type === "series"}
+          />
+          <span>Series</span>
+        </label>
+      </div>
+    </div>
+  );
 }
